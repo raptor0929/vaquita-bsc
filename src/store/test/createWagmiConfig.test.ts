@@ -1,4 +1,4 @@
-import { baseSepolia } from 'viem/chains';
+import { bscTestnet } from 'viem/chains';
 import { createWagmiConfig } from '../createWagmiConfig';
 import { Environment, EnvironmentKeys } from '../environment';
 
@@ -22,7 +22,7 @@ describe('createWagmiConfig', () => {
     Environment.production,
   ])('returns valid Wagmi config when env=%s', (environment) => {
     process.env[EnvironmentKeys.environment] = environment;
-    const config = createWagmiConfig('https://api.developer.coinbase.com/rpc/v1/base/example');
-    expect(config.chains[0].id).toEqual(baseSepolia.id);
+    const config = createWagmiConfig('https://data-seed-prebsc-1-s1.binance.org:8545');
+    expect(config.chains[0].id).toEqual(bscTestnet.id);
   });
 });

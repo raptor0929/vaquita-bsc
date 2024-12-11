@@ -1,8 +1,8 @@
 'use client';
 
 import { createConfig, http } from 'wagmi';
-import { base, baseSepolia } from 'wagmi/chains';
-import { coinbaseWallet } from 'wagmi/connectors';
+import { bscTestnet } from 'wagmi/chains';
+import { metaMask } from 'wagmi/connectors';
 
 export function createWagmiConfig(rpcUrl: string, projectId?: string) {
   // Keep this till we fully deprecated RK inside the template
@@ -10,22 +10,17 @@ export function createWagmiConfig(rpcUrl: string, projectId?: string) {
     console.log('projectId:', projectId);
   }
 
-  // Temporary hack, until we configure a FE page in OnchainKit to copy just the API key
-  const baseUrl = rpcUrl.replace(/\/v1\/(.+?)\//, '/v1/base/');
-  const baseSepoliaUrl = rpcUrl.replace(/\/v1\/(.+?)\//, '/v1/base-sepolia/');
+  // BSC Testnet RPC URL
+  const bscTestnetUrl = rpcUrl || 'https://data-seed-prebsc-1-s1.binance.org:8545/';
 
   return createConfig({
-    chains: [baseSepolia],
+    chains: [bscTestnet],
     connectors: [
-      coinbaseWallet({
-        appName: 'Andes Finance',
-        preference: 'smartWalletOnly',
-      }),
+      metaMask(),
     ],
     ssr: true,
     transports: {
-      [baseSepolia.id]: http(baseSepoliaUrl),
-      [base.id]: http(baseUrl),
+      [bscTestnet.id]: http(bscTestnetUrl),
     },
   });
 }
