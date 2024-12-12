@@ -236,7 +236,7 @@ const GroupDetailPage = () => {
                 }
               />
               <SummaryAction
-                title="Intersed earned"
+                title="Interest earned"
                 content={<p>1.5 USDC 6%</p>}
                 actionLabel={
                   group.myWithdrawals.interest.successfullyWithdrawn
